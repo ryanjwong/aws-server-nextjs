@@ -1,7 +1,6 @@
 import { connect } from 'http2';
 import type { NextApiRequest, NextApiResponse } from 'next'
 const Hyperswarm = require('hyperswarm')
-const SecretStream = require('@hyperswarm/secret-stream')
 const swarm1 = new Hyperswarm({maxPeers: 1})
 var prevPeer: Buffer;
 var connection: any;
@@ -10,6 +9,11 @@ swarm1.on('connection', (conn : any, info : any) => {
     // swarm1 will receive server connections
     conn.write('This is a server connecting to you');
     conn.on('data', (data:any) => console.log('Client Message:', data.toString()))
+    conn.on('error', (error:any) => {
+        conn.end()
+        console.log('Connection to peer closed unexpectedly', error)
+        connection = undefined;
+    })
     connection = conn
 });
     
@@ -19,7 +23,6 @@ async function swarm(key : string) {
     if (prevPeer != undefined) {
         await swarm1.leave(prevPeer)
         connection = undefined;
-        prevPeer = Buffer.alloc(32).fill(key);
     }
     
     const topic = Buffer.alloc(32).fill(key) // A topic must be 32 bytes
@@ -53,7 +56,7 @@ export default function handler(req: NextApiRequest,
                 res.status(200).json({ message : "Message: " + message + " successfully sent."});
             }
             else {
-            res.status(500 ).json({ error : "Error, message: '" + message + "' failed to send. No peer connections were found."});
+                res.status(500 ).json({ error : "Error, message: '" + message + "' failed to send. No peer connections were found."});
             }
         }
         else {
