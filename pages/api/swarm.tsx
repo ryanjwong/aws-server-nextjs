@@ -1,15 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {init} from './hyperswarm'
 import type { hyperswarm } from './hyperswarm'
-    
-
-const Hyperswarm = require('hyperswarm')
-
 var swarmStack: hyperswarm[] = []
 
 
 
-async function swarm(key : string) {
+async function swarm(key : string){
     const res = await init(key);
     swarmStack.push(res);
 }
@@ -34,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (query?.key && !query?.message) {
             const key = query.key.toString()
             await swarm(key)
-            res.status(200).json({ message : "Hyperswarm with key: " + key + " successfully created."})
+            res.status(200).json({ message : "Swarm successfully created with id: " + key})
         }
         
         else if(query?.message && query?.key) {
