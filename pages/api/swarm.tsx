@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {init} from './hyperswarm'
-import type { hyperswarm } from './hyperswarm'
+import { init } from '../components/hyperswarm'
+import type { hyperswarm } from '../components/hyperswarm'
+import { executeCodeRequest } from '../components/execute'
+
 var swarmStack: hyperswarm[] = []
 
 
@@ -16,7 +18,7 @@ function send(msg: string, swarm : hyperswarm) : boolean {
         [connection] = swarm?.swarm.connections
     }
 
-    if (connection != undefined) {
+    if (connection) {
         connection.write(msg)
         return true
     }
@@ -24,34 +26,62 @@ function send(msg: string, swarm : hyperswarm) : boolean {
 }
 
 
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const query = req.query;
     if (req.method == 'POST' ) {
-        if (query?.key && !query?.message) {
+
+        if (query?.key) {
             const key = query.key.toString()
             await swarm(key)
             res.status(200).json({ message : "Swarm successfully created with id: " + key})
         }
         
-        else if(query?.message && query?.key) {
+        else if(query?.message && query?.id) {
             const message = query.message.toString()
-            const key = query.key.toString()
-            // find matching swarm in the stack of swarms
+            const key = query.id.toString()
+            // find matching swarm with id in the stack of swarms
             const match = swarmStack.find((obj) => {
                 return obj.id === key
             })
-            
+            // if theres no match send error code 500
             if (match && send(message, match)) {
 
                 res.status(200).json({ message : "Message: " + message + " successfully sent."})
             }
             else {
-                res.status(500).json({ error : "Error, message: '" + message + "' failed to send. No peer connections were found with key: " + key})
+                res.status(500).json({ error : "Error, message: '" + message + "' failed to send. No peer connections were found with id: " + key})
             }
         }
-        
+        else if(query?.code && query?.id) {
+            const code = query.code.toString()
+            const key = query.id.toString()
+            // find matching swarm with id in the stack of swarms
+
+            const match = swarmStack.find((obj) => {
+                return obj.id === key
+            })
+
+            if (match) {
+                const result = await executeCodeRequest(code)
+                if (result.success) {
+                    if (send(result.output, match)) {
+                        res.status(200).json({ message : "Code: " + code + " successfully executed. With response: " + result.output})
+                    }
+                    else {
+                        res.status(500).json({ message : "Code: " + code + " successfully executed. With response: " + result.output + ". Peer with id: " + key + " was unable to be found."})
+                    }
+                }
+                else {
+                    res.status(500).json({ error : "Error, code: '" + code + "' failed to execute with error: " + result.output})
+                }
+            }
+            else {
+                res.status(500).json({ error : "Error, code: '" + code + "' failed to execute. No peer connections were found with id: " + key})
+            }
+        }
         else {
-            res.status(400).json({ error : "Error, no key provided"})
+            res.status(400).json({ error : "Error, no params provided"})
         }
     }
     else {

@@ -6,7 +6,7 @@ interface hyperswarm {
 }
 
 async function init(key : string) : Promise<hyperswarm> {
-    const swarm = new Hyperswarm({maxPeers: 1})
+    const swarm = new Hyperswarm()
     
     swarm.on('connection', (conn : any, info : any) => {
         // swarm1 will receive server connections
@@ -21,7 +21,7 @@ async function init(key : string) : Promise<hyperswarm> {
             conn.end()
             console.log('Connection to peer closed unexpectedly', error)
         })
-    });
+    })
 
     const topic = Buffer.alloc(32).fill(key) // A topic must be 32 bytes
     const discovery = swarm.join(topic, { server: true, client: false })
@@ -30,5 +30,5 @@ async function init(key : string) : Promise<hyperswarm> {
     return {swarm: swarm, id: key}
 }
 
-export { init };
-export type { hyperswarm };
+export { init }
+export type { hyperswarm }
