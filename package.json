@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-wagmi",
+  "name": "anonymous-web-services",
   "private": true,
   "scripts": {
     "dev": "next dev",

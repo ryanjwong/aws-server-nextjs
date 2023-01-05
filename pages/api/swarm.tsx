@@ -6,12 +6,13 @@ import { executeCodeRequest } from '../components/execute'
 var swarmStack: hyperswarm[] = []
 
 
-
+// create a swarm based off the passed key and add it to the stack
 async function swarm(key : string){
     const res = await init(key);
     swarmStack.push(res);
 }
 
+// send a message through the swarm's connection, if no connection is found return false, else return true
 function send(msg: string, swarm : hyperswarm) : boolean {
     let connection
     if (swarm?.swarm.connections) {
@@ -64,18 +65,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             if (match) {
                 const result = await executeCodeRequest(code)
+                // code executed successfully
                 if (result.success) {
+                    // data was able to be sent through swarm
                     if (send(result.output, match)) {
                         res.status(200).json({ message : "Code: " + code + " successfully executed. With response: " + result.output})
                     }
+                    // matching peer was not found
                     else {
                         res.status(500).json({ message : "Code: " + code + " successfully executed. With response: " + result.output + ". Peer with id: " + key + " was unable to be found."})
                     }
                 }
+                // code failed to execute either bc syntax or timeout
                 else {
                     res.status(500).json({ error : "Error, code: '" + code + "' failed to execute with error: " + result.output})
                 }
             }
+            // no peer was found
             else {
                 res.status(500).json({ error : "Error, code: '" + code + "' failed to execute. No peer connections were found with id: " + key})
             }
