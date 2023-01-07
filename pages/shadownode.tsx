@@ -21,7 +21,7 @@ const ShadowNode: NextPage = () => {
         <>                
         <div className="col-lg">     
         
-        <h1 className="mb-8 text-4xl font-bold" z-index="2">Manage </h1><iframe src="http://localhost:3001/route" 
+        <h1 className="mb-8 text-4xl font-bold" z-index="2">Manage </h1><iframe src="/route" 
         width="100%" 
         z-index="-1"
         scrolling="no"
