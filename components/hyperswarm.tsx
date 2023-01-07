@@ -1,6 +1,7 @@
 const Hyperswarm = require('hyperswarm')
+// @ts-ignore 
 
-interface hyperswarm {
+ interface hyperswarm {
     swarm: typeof Hyperswarm,
     id: string
 }
@@ -10,16 +11,16 @@ async function init(key : string) : Promise<hyperswarm> {
     
     swarm.on('connection', (conn : any, info : any) => {
         // swarm1 will receive server connections
-        conn.write('This is a server connecting to you')
+        conn.write('This is a Shadow Node connecting to you')
         conn.on('data', (data:any) => 
             console.log('Client Message:', data.toString())
         )
         conn.on('close', () => {
-            console.log('Connection to peer closed')
+            console.log('Connection to shadow peer closed')
           })
         conn.on('error', (error:any) => {
             conn.end()
-            console.log('Connection to peer closed unexpectedly', error)
+            console.log('Connection to shadow peer closed unexpectedly', error)
         })
     })
 

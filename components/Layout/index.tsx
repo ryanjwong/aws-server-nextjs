@@ -3,6 +3,8 @@ import Image from "next/image";
 import { ReactNode } from "react";
 import { Button, MenuDropdown, WalletOptionsModal } from "..";
 import { useAccount } from "wagmi";
+import SideMenu from '../SideMenu';
+import Dash from "../Dash"
 
 interface Props {
   children: ReactNode;
@@ -21,6 +23,7 @@ export default function Layout(props: Props) {
     if (accountData?.ens) {
       return (
         <>
+
           <div className="relative w-8 h-8 mr-2">
             {accountData.ens.avatar ? (
               <Image
@@ -55,47 +58,51 @@ export default function Layout(props: Props) {
   const renderButton = () => {
     if (accountData) {
       return (
+        <>
         <MenuDropdown
           label={renderLabel()}
           options={[{ label: "Disconnect", onClick: disconnect }]}
-        />
+        /></>
       );
     }
 
-    return (
+    return (<>
       <Button
         loading={loading || showWalletOptions}
         onClick={() => setShowWalletOptions(true)}
       >
         Connect
-      </Button>
+      </Button></>
     );
   };
 
-  return (
-    <div>
-      <Head>
-        <title>Anonymous Web Services</title>
-        <meta name="description" content="NextJS and wagmi template" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+  return ( <>
+    <div>              
+ <SideMenu />
       <WalletOptionsModal
         open={showWalletOptions}
         setOpen={setShowWalletOptions}
-      />
+      />        
 
-      <div className="absolute w-screen bg-gradient-to-r from-black to-white">
+<Head>
+        <title>Anonymous Web Services</title>
+        <meta name="description" content="Shadow Node" />
+        <link rel="icon" href="/favicon.ico" />
+     </Head>                
+
+     <div className="absolute w-screen bg-gradient-to-r from-black to-white">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center">
-            <h4 className="text-2xl font-bold text-white cursor-default">
-            Anonymous Web Services            
-            </h4>
+          <a href="/">     <h4 className="text-2xl font-bold text-white cursor-default">
+               <strong>AWS </strong>  Command Center
+            </h4></a>
           </div>
           {renderButton()}
         </div>
       </div>
       {children}
-    </div>
+    </div>           
+    </>
+
   );
 }

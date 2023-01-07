@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { init } from '../components/hyperswarm'
-import type { hyperswarm } from '../components/hyperswarm'
-import { executeCodeRequest } from '../components/execute'
+import { init }  from '../../components/hyperswarm'
+import type { hyperswarm } from '../../components/hyperswarm'
+import { executeCodeRequest } from '../../components/execute'
 
 var swarmStack: hyperswarm[] = []
 
