@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { init } from '../components/hyperswarm'
-import type { hyperswarm } from '../components/hyperswarm'
-import { executeCodeRequest } from '../components/execute'
-
+import { init } from '../../components/Functions/hyperswarm'
+import type { hyperswarm } from '../../components/Functions/hyperswarm'
+import { executeCodeRequest } from '../../components/Functions/execute'
+/*
+    TODO: Get Rid of Stack, Add map functionality, Create client interface
+*/
 var swarmStack: hyperswarm[] = []
 
 
@@ -69,16 +71,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (result.success) {
                     // data was able to be sent through swarm
                     if (send(result.output, match)) {
-                        res.status(200).json({ message : "Code: " + code + " successfully executed. With response: " + result.output})
+                        res.status(200).json({ message : "Code: '" + code + "' successfully executed" + result.time + "ms. With response: " + result.output})
                     }
                     // matching peer was not found
                     else {
-                        res.status(500).json({ message : "Code: " + code + " successfully executed. With response: " + result.output + ". Peer with id: " + key + " was unable to be found."})
+                        res.status(500).json({ message : "Code: '" + code + "' successfully executed in " + result.time + "ms. With response: " + result.output + ". Peer with id: " + key + " was unable to be found."})
                     }
                 }
                 // code failed to execute either bc syntax or timeout
                 else {
-                    res.status(500).json({ error : "Error, code: '" + code + "' failed to execute with error: " + result.output})
+                    res.status(500).json({ error : "Error, code: '" + code + "' failed to execute with error: " + result.output + " timed out after " + result.time + "ms."})
                 }
             }
             // no peer was found
