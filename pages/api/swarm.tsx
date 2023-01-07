@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { init } from '../components/hyperswarm'
-import type { hyperswarm } from '../components/hyperswarm'
-import { executeCodeRequest } from '../components/execute'
+import { init }  from '../../components/hyperswarm'
+import type { hyperswarm } from '../../components/hyperswarm'
+import { executeCodeRequest } from '../../components/execute'
 
 var swarmStack: hyperswarm[] = []
 
@@ -30,7 +30,7 @@ function send(msg: string, swarm : hyperswarm) : boolean {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const query = req.query;
-    if (req.method == 'POST' ) {
+    if (req.method == 'GET' ) {
 
         if (query?.key) {
             const key = query.key.toString()

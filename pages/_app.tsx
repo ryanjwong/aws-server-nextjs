@@ -28,7 +28,7 @@ const connectors = ({ chainId }: { chainId?: number }): Connector[] => {
     }),
     new WalletLinkConnector({
       options: {
-        appName: "Anonymous Web Services",
+        appName: "Anonymous Web Services Shadow Node",
         jsonRpcUrl: `${rpcUrl}/${infuraId}`,
       },
     }),

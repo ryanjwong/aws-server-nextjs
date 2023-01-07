@@ -1,12 +1,13 @@
 import * as fs from 'fs'
 import * as path from 'path'
+// @ts-ignore 
 
-interface executable {
+ interface executable {
     output : string,
     success : boolean
 }
 
-async function executeCodeRequest (data : string) : Promise<executable>{ 
+ async function executeCodeRequest (data : string) : Promise<executable>{ 
     var output = ''
     var success = false
     var pathToFile = path.resolve('result.py')
@@ -43,4 +44,4 @@ function sleep(ms : number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 export type { executable }
-export { executeCodeRequest }
+export  { executeCodeRequest }
