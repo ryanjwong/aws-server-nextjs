@@ -30,7 +30,7 @@ function send(msg: string, swarm : hyperswarm) : boolean {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const query = req.query;
-    if (req.method == 'GET' ) {
+    if (req.method == 'POST' ) {
 
         if (query?.key) {
             const key = query.key.toString()
