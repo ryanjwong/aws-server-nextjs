@@ -18,7 +18,7 @@ async function swarm(key : string){
 function send(msg: string, swarm : hyperswarm) : boolean {
     let connection
     if (swarm?.swarm.connections) {
-        [connection] = swarm?.swarm.connections
+        [connection] = swarm.swarm.connections
     }
 
     if (connection) {
@@ -32,6 +32,7 @@ function send(msg: string, swarm : hyperswarm) : boolean {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const query = req.query;
+    const body = req.body
     if (req.method == 'POST' ) {
 
         if (query?.key) {
