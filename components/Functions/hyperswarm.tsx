@@ -10,11 +10,11 @@ interface hyperswarm {
         "data" : 
         {
             "type" : "message"/"code",
-            "id" : int
             "attributes" : {
-                "language" : "python/node/c++/etc"
-                "code" : "any"
-            }
+                "body" : string
+            },
+            "id" : int
+
         }
     }
 */
@@ -25,11 +25,16 @@ async function init(key : string) : Promise<hyperswarm> {
         // swarm1 will receive server connections
         conn.write('This is a server connecting to you')
         conn.on('data', async (data:any) => {
-            console.log('Client Message:', data.toString())
             var json = JSON.parse(data.toString())
-            if (json?.code) {
-                var res = await executeCodeRequest(json.code)
-                conn.write((!res.success ? 'Code failed to execute ' : '') + res.output)
+            if (json?.data) {
+                const body = json.data.attributes.body
+                if (json.data.type == 'message') {
+                    console.log('Client Message:', body)
+                }
+                else if (json.data.type == 'code') {
+                    var res = await executeCodeRequest(body)
+                    conn.write((!res.success ? 'Code failed to execute ' : '') + res.output)
+                }
             }
         })
         conn.on('close', () => {
