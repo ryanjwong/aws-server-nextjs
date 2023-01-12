@@ -19,30 +19,31 @@ interface hyperswarm {
     }
 */
 async function init(key : string) : Promise<hyperswarm> {
-    const swarm = new Hyperswarm()
+    const swarm = new Hyperswarm({maxPeers : 1})
     
     swarm.on('connection', (conn : any, info : any) => {
         // swarm1 will receive server connections
         conn.write('This is a server connecting to you')
         conn.on('data', async (data:any) => {
             var json = JSON.parse(data.toString())
-            if (json?.data) {
+            if (json && json?.data) {
                 const body = json.data.attributes.body
                 if (json.data.type == 'message') {
                     console.log('Client Message:', body)
                 }
                 else if (json.data.type == 'code') {
                     var res = await executeCodeRequest(body)
-                    conn.write((!res.success ? 'Code failed to execute ' : '') + res.output)
+                    conn.write((!res.success ? 'Code failed to execute ' : 'Code executed with output: ') + res.output + "In " + res.time + " ms.")
                 }
             }
+            else {
+                conn.write('Invalid request, please follow proper API format')
+            }
         })
-        conn.on('close', () => {
-            console.log('Connection to peer closed')
-        })
-        conn.on('error', (error:any) => {
+        conn.on('error', async (error:any) => {
             conn.end()
-            console.log('Connection to peer closed unexpectedly', error)
+            console.log('Connection to client closed unexpectedly. Attempting reconnection...')
+            await swarm.listen()
         })
     })
 

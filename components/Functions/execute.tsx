@@ -22,7 +22,6 @@ async function executeCodeRequest (data : string) : Promise<executable>{
     // with arguments and send this data to res object
     process.stdout.on('data', (data : any) => {
         output += data.toString()
-        success = true
     })
 
     process.stderr.on('data', (data : any) => {
@@ -31,7 +30,12 @@ async function executeCodeRequest (data : string) : Promise<executable>{
     })
 
     process.on('close', (code : string) => {
-        console.log(`child process exited with code ${code}`)
+        if (code == '0') {
+          success = true
+        }
+        else {
+          success = false
+        }
     })
 
     function status() : boolean {
