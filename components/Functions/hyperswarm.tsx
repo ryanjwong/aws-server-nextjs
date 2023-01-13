@@ -1,4 +1,6 @@
 const Hyperswarm = require('hyperswarm')
+const DHT =  require('@hyperswarm/dht')
+
 import { executeCodeRequest } from './execute'
 interface hyperswarm {
     swarm: typeof Hyperswarm,

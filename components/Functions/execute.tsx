@@ -10,6 +10,7 @@ interface executable {
 async function executeCodeRequest (data : string) : Promise<executable>{ 
     var output = ''
     var success = false
+    var complete = false
     var pathToFile = path.resolve('result.py')
     fs.writeFile(pathToFile,  data, err => {
         if (err) throw err
@@ -30,6 +31,7 @@ async function executeCodeRequest (data : string) : Promise<executable>{
     })
 
     process.on('close', (code : string) => {
+        complete = true
         if (code == '0') {
           success = true
         }
@@ -39,7 +41,7 @@ async function executeCodeRequest (data : string) : Promise<executable>{
     })
 
     function status() : boolean {
-        return success
+        return complete
     }
 
     const time = await sleepUntil(status, 3000) // 3000ms check timeout
