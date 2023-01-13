@@ -8,10 +8,9 @@ import { executeCodeRequest } from '../../components/Functions/execute'
 var swarmStack: hyperswarm[] = []
 
 
-// create a swarm based off the passed key and add it to the stack
+// create a swarm based off the passed key 
 async function swarm(key : string){
-    const res = await init(key);
-    swarmStack.push(res);
+    await init(key);
 }
 
 // send a message through the swarm's connection, if no connection is found return false, else return true
