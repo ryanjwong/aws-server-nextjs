@@ -5,12 +5,11 @@ import { executeCodeRequest } from '../../components/Functions/execute'
 /*
     TODO: Get Rid of Stack, Add map functionality, Create client interface
 */
-var swarmStack: hyperswarm[] = []
 
 
-// create a swarm based off the passed key 
+// create a swarm based off the passed key and add it to the stack
 async function swarm(key : string){
-    await init(key);
+    const res = await init(key);
 }
 
 // send a message through the swarm's connection, if no connection is found return false, else return true
@@ -39,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await swarm(key)
             res.status(200).json({ message : "Swarm successfully created with id: " + key})
         }
-        
+        /*
         else if(query?.message && query?.id) {
             const message = query.message.toString()
             const key = query.id.toString()
@@ -91,6 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         else {
             res.status(400).json({ error : "Error, no params provided"})
         }
+        */
     }
     else {
         res.status(400).json({ error : "Error, request was not a POST method"})

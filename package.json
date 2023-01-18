@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
-    "@hyperswarm/dht": "^6.4.2",
     "@hyperswarm/secret-stream": "^6.1.1",
     "hyperswarm": "^3.0.4",
     "next": "12.0.7",
