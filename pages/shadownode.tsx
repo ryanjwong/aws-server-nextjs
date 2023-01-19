@@ -28,7 +28,6 @@ const ShadowNode: NextPage = () => {
                 height="100%" 
      
         id="inner">
-<Dash children={""} loading={false}></Dash> 
         </iframe>
         <div className="container-fluid pt-5 mt-5 pb-5">
         <div className="col-sm">     
@@ -50,7 +49,7 @@ const ShadowNode: NextPage = () => {
         <h1 className="mb-8 text-4xl font-bold">
            Shadow Node Command Center
         </h1>
-      
+        
 
       </>
     );

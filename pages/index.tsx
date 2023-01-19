@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useAccount, useBalance } from "wagmi";
 import { Button, Layout, Loader, WalletOptionsModal } from "../components";
 import Dash from "../components/Dash"
+import Map from '../components/Map'
 const Home: NextPage = () => {
   const [showWalletOptions, setShowWalletOptions] = useState(false);
   const [{ data: accountData, loading: accountLoading }] = useAccount();
@@ -40,17 +41,13 @@ const Home: NextPage = () => {
         <h1 className="mb-8 text-4xl font-bold">
            Shadow Node Command Center
         </h1>
+        <Map></Map>
       </>
     );
   };
 
   return (
     <>
-      <WalletOptionsModal
-        open={showWalletOptions}
-        setOpen={setShowWalletOptions}
-      />
-
       <Layout
         showWalletOptions={showWalletOptions}
         setShowWalletOptions={setShowWalletOptions}

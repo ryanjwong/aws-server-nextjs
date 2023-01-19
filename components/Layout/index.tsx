@@ -85,7 +85,7 @@ export default function Layout(props: Props) {
       />        
 
 <Head>
-        <title>Anonymous Web Services</title>
+        <title>AWS Command Center</title>
         <meta name="description" content="Shadow Node" />
         <link rel="icon" href="/favicon.ico" />
      </Head>                
@@ -93,11 +93,10 @@ export default function Layout(props: Props) {
      <div className="absolute w-screen bg-gradient-to-r from-black to-white">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center">
-          <a href="/">     <h4 className="text-2xl font-bold text-white cursor-default">
+          <h4 className="text-2xl font-bold text-white cursor-default">
                <strong>AWS </strong>  Command Center
-            </h4></a>
+            </h4>
           </div>
-          {renderButton()}
         </div>
       </div>
       {children}
