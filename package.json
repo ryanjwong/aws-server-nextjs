@@ -7,16 +7,18 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch"
-  },"browser": {
+  },
+  "browser": {
     "fs": false,
     "path": false,
     "os": false,
     "child_process": false
-
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.2",
+    "@headlessui/react": "^1.7.7",
+    "@heroicons/react": "^2.0.13",
     "@hyperswarm/secret-stream": "^6.1.1",
+    "@nextui-org/react": "^1.0.0-beta.12",
     "child_process": "^1.0.2",
     "d3": "^7.8.0",
     "d3-zoom": "^3.0.0",
