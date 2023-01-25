@@ -1,22 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { init }  from '../../components/hyperswarm'
-import type { hyperswarm } from '../../components/hyperswarm'
-import { executeCodeRequest } from '../../components/execute'
 
-var swarmStack: hyperswarm[] = []
+import { init } from '../../components/Functions/hyperswarm'
+import type { hyperswarm } from '../../components/Functions/hyperswarm'
+import { executeCodeRequest } from '../../components/Functions/execute'
+/*
+    TODO: Get Rid of Stack, Add map functionality, Create client interface
+*/
 
 
 // create a swarm based off the passed key and add it to the stack
 async function swarm(key : string){
     const res = await init(key);
-    swarmStack.push(res);
 }
 
 // send a message through the swarm's connection, if no connection is found return false, else return true
 function send(msg: string, swarm : hyperswarm) : boolean {
     let connection
     if (swarm?.swarm.connections) {
-        [connection] = swarm?.swarm.connections
+        [connection] = swarm.swarm.connections
     }
 
     if (connection) {
@@ -30,6 +31,7 @@ function send(msg: string, swarm : hyperswarm) : boolean {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const query = req.query;
+    const body = req.body
     if (req.method == 'POST' ) {
 
         if (query?.key) {
@@ -37,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await swarm(key)
             res.status(200).json({ message : "Swarm successfully created with id: " + key})
         }
-        
+        /*
         else if(query?.message && query?.id) {
             const message = query.message.toString()
             const key = query.id.toString()
@@ -69,16 +71,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (result.success) {
                     // data was able to be sent through swarm
                     if (send(result.output, match)) {
-                        res.status(200).json({ message : "Code: " + code + " successfully executed. With response: " + result.output})
+                        res.status(200).json({ message : "Code: '" + code + "' successfully executed" + result.time + "ms. With response: " + result.output})
                     }
                     // matching peer was not found
                     else {
-                        res.status(500).json({ message : "Code: " + code + " successfully executed. With response: " + result.output + ". Peer with id: " + key + " was unable to be found."})
+                        res.status(500).json({ message : "Code: '" + code + "' successfully executed in " + result.time + "ms. With response: " + result.output + ". Peer with id: " + key + " was unable to be found."})
                     }
                 }
                 // code failed to execute either bc syntax or timeout
                 else {
-                    res.status(500).json({ error : "Error, code: '" + code + "' failed to execute with error: " + result.output})
+                    res.status(500).json({ error : "Error, code: '" + code + "' failed to execute with error: " + result.output + " timed out after " + result.time + "ms."})
                 }
             }
             // no peer was found
@@ -89,6 +91,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         else {
             res.status(400).json({ error : "Error, no params provided"})
         }
+        */
     }
     else {
         res.status(400).json({ error : "Error, request was not a POST method"})
