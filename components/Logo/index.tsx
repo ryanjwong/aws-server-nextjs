@@ -6,9 +6,9 @@ export const Logo = () => (
         <Image 
         alt="logo"
 
-        src="/logo.png"
-        width={100}
-        height={100}
+        src="/logo.svg"
+        width={80}
+        height={300}
         
         /> 
      </div>
