@@ -10,6 +10,7 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -17,6 +18,7 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  
   async rewrites() {
     return [
       {

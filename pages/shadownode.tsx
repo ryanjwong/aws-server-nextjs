@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount, useBalance } from "wagmi";
@@ -11,10 +12,11 @@ const ShadowNode: NextPage = () => {
 
     return (
       <>
-        <h1 className="mb-8 text-4xl font-bold">
-           Shadow Node Command Center
-        </h1>
-        
+       <Head>
+          <title>shadW Command Center</title>
+          <meta name="description" content="Shadow Node" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>                
 
       </>
     );

@@ -9,10 +9,12 @@ export default function Bar() {
        <Navbar  variant={"floating"}>
 
         <Navbar.Brand>
-        <Logo/>
+        <Text b color="inherit" hideIn="xs">
+            shadW
+          </Text>
         </Navbar.Brand>
         <Navbar.Content activeColor={"primary"}hideIn="xs">
-          <Navbar.Link href="#">Whitepaper</Navbar.Link>
+          <Navbar.Link href="#">Litepaper</Navbar.Link>
           <Navbar.Link href="#">Team</Navbar.Link>
           <Navbar.Link href="#">Pricing</Navbar.Link>
           <Navbar.Link href="#">Company</Navbar.Link>
