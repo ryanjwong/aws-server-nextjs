@@ -21,7 +21,8 @@ export default function Layout(props: Props) {
   return ( <>
    
       <div>              
-        
+        {children}    
+
         <Box
           css={{
             maxW: "100%"

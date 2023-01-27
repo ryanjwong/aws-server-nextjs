@@ -41,8 +41,8 @@ const Home: NextPage = () => {
      {!loading &&
 
         <Layout>
-          
-          <Bar/>     
+                    <Bar/>     
+
 
           
         </Layout>
