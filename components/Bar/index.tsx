@@ -51,7 +51,6 @@ export default function Bar() {
               css={{
                 color: "white",
               }}
-              isActive={index === 2}
             >
               <Link
                 color="inherit"
