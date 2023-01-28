@@ -641,7 +641,9 @@ body {
 	right: 0;
 }*/
 
-
+.line {
+    background-color: white !important;
+}
 
 iframe{      
 	display: flex;  /* iframes are inline by default */   
