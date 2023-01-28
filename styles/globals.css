@@ -645,6 +645,12 @@ body {
     background-color: white !important;
 }
 
+
+.nextui-navbar-collapse-wrapper {
+	background: none !important;
+	backdrop-filter: none !important;
+
+}
 iframe{      
 	display: flex;  /* iframes are inline by default */   
 	height: 100vh;  /* Set height to 100% of the viewport height */   

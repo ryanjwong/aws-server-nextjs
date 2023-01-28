@@ -39,6 +39,7 @@ export default function Bar() {
             </Button>
           </Navbar.Item>
         </Navbar.Content>
+
         <Navbar.Collapse 
           css={{
             background: "rgba(0, 0, 0, 0.4)"
@@ -56,6 +57,7 @@ export default function Bar() {
                 color="inherit"
                 css={{
                   minWidth: "100%",
+                
                 }}
                 href="#"
               >
