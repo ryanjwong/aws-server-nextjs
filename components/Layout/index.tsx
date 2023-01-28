@@ -20,7 +20,7 @@ export default function Layout(props: Props) {
  
   return ( <>
    
-      <div>              
+      <div className="bg-neutral-900	">              
         {children}    
 
         <Box

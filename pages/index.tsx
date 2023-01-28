@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import { useAccount, useBalance } from "wagmi";
 import { Button, Layout, Loader, WalletOptionsModal } from "../components";
 import { Progress, Grid } from "@nextui-org/react";
-import Dash from "../components/Dash"
 import Map from '../components/Map'
 import Bar from '../components/Bar'
 import Head from "next/head";
@@ -18,18 +17,6 @@ const Home: NextPage = () => {
   },[loading])
   
 
-  const renderContent = () => {
-    
-    return (
-      <>
-        <h1 className="mb-8 text-4xl font-bold">
-           Shadow Node Command Center
-        </h1>
-        <Map></Map>
-      </>
-    );
-  };
-
   return (
     
     <>
@@ -37,16 +24,16 @@ const Home: NextPage = () => {
       <title>shadW Command Center</title>
       <meta name="description" content="Shadow Node" />
       <link rel="icon" href="/favicon.ico" />
-    </Head>    
-     {!loading &&
+    </Head>
+    {loading && <Loader size ={2000}/>}
+    {!loading &&
+      <Layout >
+                  <Bar/>     
 
-        <Layout>
-                    <Bar/>     
 
-
-          
-        </Layout>
-     }
+        
+      </Layout>
+    }
     </>
   );
 };

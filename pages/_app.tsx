@@ -1,9 +1,12 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { ThemeProvider as NextThemesProvider, ThemeProvider } from 'next-themes';
 import { Provider, chain, defaultChains } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { WalletLinkConnector } from "wagmi/connectors/walletLink";
+import { useTheme } from 'next-themes'
+
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
 
 const chains = defaultChains;
@@ -35,9 +38,11 @@ const connectors = ({ chainId }: { chainId?: number }): Connector[] => {
 };
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const { theme, setTheme } = useTheme()
+  setTheme('dark');
   return (
-    <Provider autoConnect connectors={connectors}>
-      <Component {...pageProps} />
-    </Provider>
+
+      <Component  {...pageProps} />
+   
   );
 }
