@@ -21,12 +21,6 @@ export default function Bar() {
         <Navbar.Toggle showIn="xs"/>
 
         <Navbar.Brand>
-          <Image 
-            src="/favicon.ico" 
-            alt="logo"  
-            width={50}
-            height={50}
-          />
           <Text b color="white" hideIn="xs">
               SHADW
           </Text>
