@@ -4,12 +4,13 @@ import Image from 'next/image'
 import Map from "../Map"
 export const Content = () => (
   <Box css={{px: "$12", mt: "$8", "@xsMax": {px: "$10"}}}>
-    <Grid.Container gap={2} justify="flex-start">
-      <Grid xs={6}>
-        <Card isHoverable isPressable variant="bordered" 
+    <Grid.Container gap={4} justify="center" >
+      <Grid lg={7}>
+        <Card isHoverable variant="bordered"
           css={{ 
             borderColor: "rgb(255, 255, 255, 0.3)",
-            $$cardColor: "bg-neutral-900"
+            $$cardColor: "bg-neutral-900",
+            alignItems: "center"
          }}
         >
             <Card.Body>
@@ -17,21 +18,8 @@ export const Content = () => (
             </Card.Body>
         </Card>
       </Grid>
-      <Grid xs={4} justify = "center">
-          <Card variant="bordered" css={{ 
-            borderColor: "rgb(255, 255, 255, 0.3)",
-            $$cardColor: "bg-neutral-900",
-          }}>
-            <Card.Header>
-              <Text b color="white" size={"$lg"}>Cloud Computing - Reinvented</Text>
-            </Card.Header>
-            <Card.Divider css={{color:"white"}}/>
-            <Text color="white"  h4 css={{
-              textAlign: "center",
-            }}>
-              SHADW brings new life to cloud computing.
-            </Text>
-        </Card>
+      <Grid lg={4} justify = "center" alignItems="center" alignContent="center">
+              <Text b color="white"  size={45} >Cloud Computing: Reinvented</Text>
       </Grid>
     </Grid.Container>
     <Spacer y={1} />

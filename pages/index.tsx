@@ -2,7 +2,7 @@ import { Children, useState, useEffect } from "react";
 import type { NextPage } from "next";
 import { useAccount, useBalance } from "wagmi";
 import { Button, Layout, Loader, WalletOptionsModal } from "../components";
-import { Progress, Grid } from "@nextui-org/react";
+import { Progress, Grid, Loading } from "@nextui-org/react";
 import Map from '../components/Map'
 import Bar from '../components/Bar'
 import Head from "next/head";
@@ -25,13 +25,12 @@ const Home: NextPage = () => {
       <meta name="description" content="Shadow Node" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    {loading && <Loader size ={2000}/>}
+    {loading &&
+      <Loading />
+    }
     {!loading &&
       <Layout >
-                  <Bar/>     
-
-
-        
+        <Bar/>      
       </Layout>
     }
     </>
