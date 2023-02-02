@@ -6,7 +6,7 @@ export const Content = () => (
   <Box css={{px: "$12", mt: "$8", "@xsMax": {px: "$10"}}}>
     <Grid.Container gap={4} justify="center" >
       <Grid lg={7}>
-        <Card isHoverable variant="bordered"
+        <Card isHoverable isPressable variant="bordered"
           css={{ 
             borderColor: "rgb(255, 255, 255, 0.3)",
             $$cardColor: "bg-neutral-900",
@@ -19,7 +19,9 @@ export const Content = () => (
         </Card>
       </Grid>
       <Grid lg={4} justify = "center" alignItems="center" alignContent="center">
-              <Text b color="white"  size={45} >Cloud Computing: Reinvented</Text>
+              <Text b color="white"  size={45}  css={{
+          textGradient: "45deg, $blue600 -20%, $white 100%",
+        }}>Cloud Computing: Reinvented</Text>
       </Grid>
     </Grid.Container>
     <Spacer y={1} />
