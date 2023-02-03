@@ -22,6 +22,7 @@ export const Content = () => (
               <Text b color="white"  size={45}  css={{
           textGradient: "45deg, $blue600 -20%, $white 100%",
         }}>Cloud Computing: Reinvented</Text>
+        
       </Grid>
     </Grid.Container>
     <Spacer y={1} />

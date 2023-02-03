@@ -28,7 +28,6 @@ export default function Layout(props: Props) {
             maxW: "100%"
           }}
   >
-          <Content/>
         </Box>
 
       </div>   
