@@ -29,7 +29,7 @@ export default function Bar() {
           </Text>
         </Navbar.Brand>
         <Navbar.Content activeColor={"primary"} hideIn="xs" variant={"underline-rounded"}>
-          <Navbar.Link isActive={currentRoute === "/home"} href="/home" css={{color: "white"}}>Home</Navbar.Link>
+          <Navbar.Link isActive={currentRoute === "/home" || currentRoute == "/_error" } href="/home" css={{color: "white"}}>Home</Navbar.Link>
           <Navbar.Link isActive={currentRoute === "/litepaper"} href="/litepaper" css={{color: "white"}}>Litepaper</Navbar.Link>
           <Navbar.Link isActive={currentRoute === "/team"} href="#" css={{color: "white"}}>Team</Navbar.Link>
           <Navbar.Link isActive={currentRoute === "/contact"} href="#" css={{color: "white"}}>Contact Us</Navbar.Link>
