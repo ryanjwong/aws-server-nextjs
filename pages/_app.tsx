@@ -24,9 +24,9 @@ export default function MyApp() {
   return (
     <>
     <Head>
-    <title>shadW Command Center</title>
+    <title>shadW</title>
     <meta name="description" content="Shadow Node" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/public/favicon.ico" />
     </Head>
 
     {!loading &&
